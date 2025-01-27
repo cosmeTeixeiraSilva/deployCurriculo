@@ -4,7 +4,7 @@ import Image from "next/image";
 export const revalidate = 10;
 export default function Home() {
   return (
-    <div className="flex flex-col justify-center items-start  ">
+    <div className="flex flex-col justify-center items-start w-[90vw] mx-auto ">
       {/*buton1*/}
 
       <a href={"/cliente"} className="bg-blue-800 rounded p-3 m-3 text-white min-w-40 text-center ">Clientes</a>
