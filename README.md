@@ -1,13 +1,7 @@
 # deployCurriculo
 Teste de Deploy de Curriculo
 
-Primeiro crie um repositório do seu aplicativo no GitHUB e pode ser público ou privado e suba seus arquivos e não esqueça de rodar os comando (npm run build) e excluir a pasta node_modules antes de subir seu projeto para o gitHUB, o DEPLOY é um processo de extrama organização e detalhes.
-
-Edite o arquivo next.config.mjs para e deixe como a imagem abaixo:
-
-![image](https://github.com/user-attachments/assets/9fe4eb92-db21-4b77-97d7-b015f0a64c94)
-
-
+Primeiro crie um repositório do seu aplicativo no GitHUB e pode ser público ou privado e suba seus arquivos e não esqueça de rodar os comando (npm run build) e excluir a pasta node_modules, .next caso exista e as que não pertecem a seu App, subir seu projeto para o gitHUB, o DEPLOY é um processo de extrama organização e detalhes.
 
 Apos subir a aplicação para o GITHUB você deve Abrir o seu Netlify em sua conta e crie um novo site veja abaixo a imagem:
 
