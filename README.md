@@ -1,16 +1,36 @@
-# deployCurriculo
-Teste de Deploy de Curriculo
+This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
-Primeiro crie um repositório do seu aplicativo no GitHUB e pode ser público ou privado e suba seus arquivos e não esqueça de rodar os comando (npm run build) e excluir a pasta node_modules, .next caso exista e as que não pertecem a seu App, subir seu projeto para o gitHUB, o DEPLOY é um processo de extrama organização e detalhes, arquivos que deve subir veja abaixo: 
+## Getting Started
 
-![image](https://github.com/user-attachments/assets/61a62f76-8f4b-4b30-bec7-c8ca28eaa75a)
+First, run the development server:
 
-Apos subir a aplicação para o GITHUB você deve Abrir o seu Netlify em sua conta e crie um novo site veja abaixo a imagem:
+```bash
+npm run dev
+# or
+yarn dev
+# or
+pnpm dev
+# or
+bun dev
+```
 
-![image](https://github.com/user-attachments/assets/068bdb42-9efd-4a66-a16a-af6a126bda9f)
+Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-1 . Adicione um novo site no Netlify (Online) na imagem acima clicar em Add new site importando diretamento do GITHUB de forma simples e fácil e o Netlify fará todo o processo restante e aguarde ele concluir o deploy da Aplicação Web e assim seu Aplicativo está no Ar, lembrando que o Netlify não oferece suporte a Banco de Dados e futuramente veremos como devemos trabalhar com banco de dados com o NEXTJS, veja abaixo a imagem qdo tudo terminar corretamente, veja as imagens abaixo:
+You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
 
+This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
 
+## Learn More
 
+To learn more about Next.js, take a look at the following resources:
 
+- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
+- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+
+You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+
+## Deploy on Vercel
+
+The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+
+Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
