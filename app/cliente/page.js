@@ -2,6 +2,7 @@
 //atualiza o cache a cada 5 segundos 
 //export const revalidate = 5;
 
+import { clear } from "console";
 import Link from "next/link";
 
 export const dynamic = "force-dinamic";
