@@ -10,3 +10,10 @@
 # Selecione fazer Deploy com o GITHUB 
 
 ![image](https://github.com/user-attachments/assets/43e65260-01dc-45a6-a80d-fbbf305d9787)
+
+# Caso necessário autorize o Netlify acessar o repositório ou permita acessar todos e depois coloque o SITE NAME e ao final  
+
+![image](https://github.com/user-attachments/assets/5d4cce26-cfab-41bf-b029-bb17e9ea7ae4)
+
+![image](https://github.com/user-attachments/assets/a855af6c-c836-4d36-8ba3-2585f7a6b561)
+
