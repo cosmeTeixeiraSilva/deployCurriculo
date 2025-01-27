@@ -9,7 +9,6 @@ Apos subir a aplicação para o GITHUB você deve Abrir o seu Netlify em sua con
 
 1 . Adicione um novo site no Netlify (Online) na imagem acima clicar em Add new site importando diretamento do GITHUB de forma simples e fácil e o Netlify fará todo o processo restante e aguarde ele concluir o deploy da Aplicação Web e assim seu Aplicativo está no Ar, lembrando que o Netlify não oferece suporte a Banco de Dados e futuramente veremos como devemos trabalhar com banco de dados com o NEXTJS, veja abaixo a imagem qdo tudo terminar corretamente, veja as imagens abaixo:
 
-![image](https://github.com/user-attachments/assets/9cc0863b-110a-42a9-84c1-d1b8b34e724b)
 
 
 
