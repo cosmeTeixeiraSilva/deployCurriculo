@@ -11,7 +11,7 @@
 
 ![image](https://github.com/user-attachments/assets/43e65260-01dc-45a6-a80d-fbbf305d9787)
 
-# Caso necessário autorize o Netlify acessar o repositório ou permita acessar todos e depois coloque o SITE NAME e ao final  
+# Caso necessário autorize o Netlify acessar o repositório ou permita acessar todos e depois coloque o SITE NAME e ao final clicar no botão como na segunda imagem e aguarde o processo de DEPLOY da sua aplicação
 
 ![image](https://github.com/user-attachments/assets/5d4cce26-cfab-41bf-b029-bb17e9ea7ae4)
 
