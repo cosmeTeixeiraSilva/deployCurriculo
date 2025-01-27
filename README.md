@@ -7,3 +7,6 @@
 ![image](https://github.com/user-attachments/assets/89bc54f5-2dc7-4c43-bfd7-b9ad6a3e7f31)
 
 
+# Selecione fazer Deploy com o GITHUB 
+
+![image](https://github.com/user-attachments/assets/43e65260-01dc-45a6-a80d-fbbf305d9787)
