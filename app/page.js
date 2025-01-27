@@ -8,7 +8,9 @@ export default function Home() {
 
       <a href={"/cliente"} className="bg-blue-800 rounded p-3 m-3">clientes </a>
       <h3 className="text-white">Atualizando meu Sistema </h3>
+      <div className="w-full h-80 bg-white">
 
+      </div>
 
     </div>
   );
