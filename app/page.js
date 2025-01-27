@@ -9,7 +9,7 @@ export default function Home() {
 
       <a href={"/cliente"} className="bg-blue-800 rounded p-3 m-3 text-white min-w-40 text-center ">Clientes</a>
 
-      <div className="relative w-1/2 max-w-1/2 h-80 bg-white mx-auto rounded border border-white overflow-hidden ">
+      <div className="relative w-full sm:w-1/2 max-w-full h-80 sm:h-96 bg-white mx-auto rounded border border-white overflow-hidden">
         <Image
           src="/uber1.jpg"
           alt="image1"
@@ -17,11 +17,10 @@ export default function Home() {
           objectFit="cover" // Ajusta a imagem proporcionalmente para cobrir o container
           className="absolute top-0 left-0 z-0"
         />
-        <span className="absolute z-10 bg-white/60 text-black p-4 rounded bottom-5 right-5 font-bold text-xl">
+        <span className="absolute z-10 bg-white/60 text-black p-4 rounded bottom-5 right-5 font-bold text-xl sm:text-2xl">
           Com Uber você vai mais longe...
         </span>
       </div>
-
     </div>
   );
 }
