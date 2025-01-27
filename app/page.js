@@ -7,6 +7,7 @@ export default function Home() {
       {/*buton1*/}
 
       <a href={"/cliente"} className="bg-blue-800 rounded p-3 m-3">clientes </a>
+      <h3 className="text-white">Atualizando meu Sistema </h3>
 
 
     </div>
