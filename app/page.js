@@ -4,12 +4,12 @@ import Image from "next/image";
 export const revalidate = 10;
 export default function Home() {
   return (
-    <div className="flex flex-col justify-center items-start">
+    <div className="flex flex-col justify-center items-start  ">
       {/*buton1*/}
 
-      <a href={"/cliente"} className="bg-blue-800 rounded p-3 m-3 text-white">clientes </a>
+      <a href={"/cliente"} className="bg-blue-800 rounded p-3 m-3 text-white min-w-40 text-center ">Clientes</a>
 
-      <div className="relative w-1/2 max-w-1/2 h-80 bg-white mx-auto rounded border border-white overflow-hidden">
+      <div className="relative w-1/2 max-w-1/2 h-80 bg-white mx-auto rounded border border-white overflow-hidden ">
         <Image
           src="/uber1.jpg"
           alt="image1"
