@@ -1,34 +1,42 @@
 "use client";
+
 import React, { useState } from "react";
-import { Autenticando } from "../../_services/authServices";
-import { Button } from "@/components/ui/button";
-import { useAuth } from "@/context/autContext";
+import { useRouter } from "next/navigation";
+import { autenticarUsuario } from "@/app/_services/authServices";
+import { Button } from "@/components/ui/button"; // Ajuste se você tiver outro botão
 
 export default function Formlogin() {
-  const { login } = useAuth();
   const [user, setUser] = useState("");
   const [senha, setSenha] = useState("");
+  const [mensagem, setMensagem] = useState("");
+  const [autenticando, setAutenticando] = useState(false);
+  const router = useRouter();
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    const formData = new FormData(event.target);
-    const res = await Autenticando(formData);
+    setAutenticando(true);
+    const form = event.target;
+    const formData = new FormData(form);
+    const dados = Object.fromEntries(formData.entries());
+    const result = await autenticarUsuario(dados);
 
-    if (res.ok) {
-      login(res.user); // <-- aqui corrigido
-      window.location.href = "/home";
+    if (result.error) {
+      setMensagem(result.error);
+      router.refresh();
     } else {
-      alert(res.message);
+      setAutenticando(false);
+      router.push("/home");
     }
-
-    console.log("Resposta do login:", res);
   };
 
   return (
     <form
       onSubmit={handleSubmit}
-      className="flex flex-col items-center justify-center space-y-4 w-[90vw]   sm:w-1/2  bg-[#121212]"
+      className="flex flex-col items-center justify-center space-y-6 w-[90vw] sm:w-full bg-[#121212]"
     >
+      {mensagem && (
+        <p className="text-red-500 bg-white p-2 rounded">{mensagem}</p>
+      )}
       <input
         type="text"
         name="user"
@@ -36,23 +44,24 @@ export default function Formlogin() {
         value={user}
         onChange={(e) => setUser(e.target.value.toLowerCase().trim())}
         autoFocus
-        className="rounded p-2 w-full sm:w-1/2 text-blue-500  text-xl h-12"
+        className="rounded bg-slate-200 p-2 w-full  text-blue-500 text-xl h-12 border-4 border-orange-400"
       />
       <input
         type="password"
+        inputMode="numeric" // Sugere teclado numérico em mobile
+        pattern="[0-9]*" // Ajuda em alguns navegadores
         name="senha"
         placeholder="Senha..."
         value={senha}
-        onChange={(e) => setSenha(e.target.value.toLowerCase().trim())}
-        className="rounded p-2 w-full sm:w-1/2 text-blue-500 text-xl h-12"
+        onChange={(e) => setSenha(e.target.value)}
+        className="rounded bg-slate-200 p-2 w-full sm:w-full text-blue-500 text-xl h-12 border-4 border-orange-400"
       />
 
       <Button
-        autoFocus
         type="submit"
-        className="rounded p-2 bg-blue-500 w-full sm:w-1/2 font-bold  text-white text-xl h-12 hover:cursor-pointer hover:opacity-50 hover:bg-orange-400 border-2 "
+        className="rounded p-2 bg-[#004A8D] w-full sm:w-full font-bold text-white text-xl h-12 hover:cursor-pointer hover:opacity-50 hover:bg-orange-400 border-2"
       >
-        Entrar
+        {autenticando ? "Autenticando..." : "ENTRAR"}
       </Button>
     </form>
   );

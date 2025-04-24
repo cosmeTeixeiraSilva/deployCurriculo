@@ -83,7 +83,7 @@ export default function VotacaoJurado() {
   }
 
   return (
-    <div className="w-full  text-white bg-[#121212] min-h-screen flex flex-col gap-y-4  ">
+    <div className="w-full    min-h-screen flex flex-col gap-y-4  ">
       <Menu />
       <Header />
       <form
@@ -93,7 +93,7 @@ export default function VotacaoJurado() {
         <label className="font-bold text-xl  text-orange-500">Equipe:</label>
         <select
           name="equipe"
-          className="bg-zinc-900 rounded px-3 py-2 text-xl border "
+          className=" text-blue-400 rounded px-3 py-2 text-xl border  bg-slate-200"
         >
           <option value={1}>Equipe 1</option>
           <option value={2}>Equipe 2</option>

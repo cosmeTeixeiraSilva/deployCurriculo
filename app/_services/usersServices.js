@@ -1,20 +1,22 @@
 'use server';
 import prisma from "@/lib/db";
-
+import bcrypt from 'bcryptjs';
 export async function criarUsuario(dados) {
 
     try {
-        const nome = (dados.nome).toUpperCase();
-        const celular = String(dados.celular);
-        const nivel = Number(dados.nivel);
-        const senhaCripto = "12345678";
 
-        console.log(dados);
+
+        const nome = (dados.nome).toUpperCase().trim();
+        const celular = String(dados.celular).trim();
+        const nivel = Number(dados.nivel);
+        //Criptografando a Senha 
+        const senhaCripto = await bcrypt.hash(celular, 10);
+        //console.log(dados);
         const result = await prisma.usuarios.create({
             data: { nome, celular, nivel, senhaCripto }
         });
-        console.log(result);
-        console.log("Usuario Criado...");
+        //console.log(result);
+        //console.log("Usuario Criado...");
 
         return { status: true, message: `${nome} criado!`, result };
 
@@ -27,10 +29,22 @@ export async function criarUsuario(dados) {
 
 
 
-export async function listarUsuarios() {
+export async function listarUsuarios(texto = "") {
     try {
+
         const usuarios = await prisma.usuarios.findMany({
-            orderBy: { nome: "asc" },
+            where: texto
+                ? {
+                    nome: {
+                        contains: texto,
+                        mode: "insensitive", // ignora maiúsculas/minúsculas
+                    },
+                }
+                : undefined,
+            orderBy: [
+                { nivel: "desc" },
+                { nome: "asc" },
+            ],
         });
 
         return {
@@ -47,21 +61,45 @@ export async function listarUsuarios() {
     }
 }
 
+
 export async function excluirUsuario(id) {
     try {
+        const [usuario] = await prisma.$transaction([
+            prisma.usuarios.findUnique({
+                where: { id },
+            }),
+            // Vamos deixar o delete depois, só se o usuário existir
+        ]);
 
-        console.log(`Excluindo  ${id}`)
-        await prisma.usuarios.delete({
-            where: { id }
-        });
-        console.log(`Excluido  ${id}`)
-        return { status: true, message: "Usuário Excluido com Sucesso...", }
+        if (!usuario) {
+            return {
+                status: false,
+                message: "Usuário não encontrado para exclusão.",
+            };
+        }
 
+        // Agora sim, executa find + delete em uma única transação
+        await prisma.$transaction([
+            prisma.usuarios.delete({
+                where: { id },
+            }),
+        ]);
+
+        return {
+            status: true,
+            message: `Usuário '${usuario.nome}' foi excluído com sucesso.`,
+            nome: usuario.nome,
+        };
     } catch (error) {
-
-        return { status: false, message: "Erro ao excluir Usuário...", error };
+        console.error("Erro ao excluir usuário:", error);
+        return {
+            status: false,
+            message: "Erro ao excluir usuário.",
+            error,
+        };
     }
 }
+
 
 export async function findUsuario(id) {
     try {
@@ -80,12 +118,49 @@ export async function findUsuario(id) {
     }
 }
 
+
+export async function findUsuarioByNome(nomeRecebido) {
+    try {
+        if (!nomeRecebido || typeof nomeRecebido !== "string") {
+            return { status: false, message: "Nome de usuário inválido" };
+        }
+
+        const nome = nomeRecebido.trim().toUpperCase();
+
+        const usuario = await prisma.usuarios.findFirst({
+            where: { nome },
+            select: {
+                id: true,
+                nome: true,
+                nivel: true,
+                senhaCripto: true
+                // ⚠️ NÃO inclua senha, token ou dados sensíveis aqui
+            },
+        });
+
+        if (!usuario) {
+            return { status: false, message: "Usuário não encontrado" };
+        }
+
+        return { status: true, message: "Usuário localizado", usuario };
+    } catch (error) {
+        console.error("Erro ao buscar usuário:", error.message);
+        return {
+            status: false,
+            message: "Erro interno ao buscar usuário",
+        };
+    }
+}
+
+
 export async function updateUsuario(dados) {
     try {
-        const { id, nome } = dados;
 
-        const nivel = parseInt(dados.nivel); // <-- Aqui converte pra int
-        const celular = String(dados.celular); // <-- Aqui converte pra int
+        const id = (dados.id).trim();
+        const nome = (dados.nome).toUpperCase().trim();
+        const celular = String(dados.celular).trim();
+        const nivel = Number(dados.nivel);
+
         if (!id || !nome || !celular || isNaN(nivel)) {
             return {
                 status: false,
@@ -93,9 +168,11 @@ export async function updateUsuario(dados) {
             };
         }
 
+        //Criptografando a Senha 
+        const senhaCripto = await bcrypt.hash(celular, 10);
         const usuario = await prisma.usuarios.update({
             where: { id },
-            data: { nome, celular, nivel },
+            data: { nome, celular, nivel, senhaCripto },
         });
 
         return {
