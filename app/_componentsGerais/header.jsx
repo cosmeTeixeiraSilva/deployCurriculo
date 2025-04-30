@@ -12,7 +12,7 @@ export default function Header() {
   });
 
   return (
-    <div className="flex items-center justify-center w-full my-2 mx-auto gap-x-4  rounded">
+    <div className="flex items-center justify-between  w-full my-2 mx-auto px-3  ">
       <Image
         src={"/semanaS.svg"}
         alt="foguete"
@@ -20,8 +20,20 @@ export default function Header() {
         height={50}
         className="w-[30vw] sm:w-[150px]"
       />
-      <Image src={"/foguete.png"} alt="foguete" width={70} height={50}   className="w-[20vw] sm:w-[70px]"/>
-      <Image src={"/logosenac.png"} alt="foguete" width={150} height={50}  className="w-[30vw] sm:w-[150px]"/>
+      <Image
+        src={"/foguete.png"}
+        alt="foguete"
+        width={70}
+        height={50}
+        className="w-[20vw] sm:w-[70px]"
+      />
+      <Image
+        src={"/logosenac.png"}
+        alt="foguete"
+        width={150}
+        height={50}
+        className="w-[30vw] sm:w-[150px]"
+      />
     </div>
   );
 }

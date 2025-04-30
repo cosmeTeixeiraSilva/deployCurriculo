@@ -26,7 +26,7 @@ export default async function UsuariosPage() {
     const usuarios = await listarUsuarios();
 
     return (
-      <div className="sm:w-2/3 w-screen  mx-auto text-white flex flex-col  h-screen bg-[#121212] text-start rounded  ">
+      <div className="sm:w-[90vw] w-screen  mx-auto text-white flex flex-col  h-screen bg-[#121212] text-start rounded  ">
         <Menu />
 
         <div className="flex w-full px-2 items-center justify-between mx-auto  my-3">

@@ -6,18 +6,16 @@ import Image from "next/image";
 
 export default function LoginPage() {
   return (
-    <main className="flex min-h-screen items-start justify-center w-full ">
-      <div className="p-4 text-white">
-        <HeaderLogin />
-        <Formlogin />
-        <Image
-          src={"/semanaS.svg"}
-          alt="foguete"
-          width={200}
-          height={100}
-          className="mx-auto mt-8"
-        />
-      </div>
+    <main className="flex flex-col min-h-screen items-start justify-start w-screen sm:w-1/2 mx-auto ">
+      <HeaderLogin />
+      <Formlogin />
+      <Image
+        src={"/semanaS.svg"}
+        alt="foguete"
+        width={250}
+        height={200}
+        className="mx-auto mt-10"
+      />
     </main>
   );
 }

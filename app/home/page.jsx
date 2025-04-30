@@ -58,7 +58,7 @@ export default function Page() {
   if (!autorizado) return null;
 
   return (
-    <div className="mx-auto mt-4 flex flex-col bg-[#121212] sm:w-full w-screen items-center justify-start gap-y-2 m-auto">
+    <div className="mx-auto mt-4 flex flex-col bg-[#121212] sm:w-full w-screen items-center justify-between gap-y-2 m-auto">
       <Header />
       <Link href={"/votar"}>
         <Button className="w-[80vw] sm:w-[30vw] text-xl font-bold sm:text-2xl h-12 border-2 border-white-400 bg-[#004A8D] hover:opacity-50 hover:bg-[#004A8D] flex items-center justify-center">

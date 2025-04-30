@@ -157,7 +157,7 @@ export default function VotacaoJurado() {
   }
 
   return (
-    <div className="sm:w-2/3 w-screen  text-white bg-[#121212] min-h-screen flex flex-col gap-y-2 mx-auto">
+    <div className="sm:w-full w-screen  text-white bg-[#121212] min-h-screen flex flex-col gap-y-2 mx-auto">
       <Header />
       <form
         onSubmit={handleRegistroNota}

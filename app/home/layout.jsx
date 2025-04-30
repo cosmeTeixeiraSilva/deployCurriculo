@@ -9,7 +9,7 @@ export default async function Layout({ children }) {
   }
 
   return (
-    <div className="flex flex-col items-center justify-start sm:w-2/3 w-screen bg-[#121212] h-screen   sm:shadow-lg sm:shadow-[#F7941D] mx-auto overflow-hidden">
+    <div className="flex flex-col items-center justify-start sm:w-[90vw] w-screen bg-[#121212] h-screen   sm:shadow-lg sm:shadow-[#F7941D] mx-auto overflow-hidden">
       {resultado.status && <Menu />}
 
       <div className="h-full">{children}</div>

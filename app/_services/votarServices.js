@@ -1,7 +1,7 @@
 'use server';
 import prisma from "@/lib/db";
 
-export async function votar(dados) {
+export async function votar(dados, nomeJurado) {
     try {
         const id_jurado = dados.idJurado;
         const id_competidor = parseInt(dados.competidor);
@@ -69,7 +69,7 @@ export async function votar(dados) {
             },
         });
 
-        console.log("Voto registrado:", result);
+        console.log(`Jurado ${usuario.nome}  votou quesito ${id_quesito} equipe ${id_competidor} nota ${voto}.`);
 
         return {
             status: true,
@@ -81,6 +81,103 @@ export async function votar(dados) {
         return {
             status: false,
             message: `Erro ao registrar a nota: ${error.message}`,
+        };
+    }
+}
+//pegando o total geral de pontos 
+export async function getTotalGeralPontos() {
+    try {
+        const resultado = await prisma.votos.aggregate({
+            _sum: {
+                voto: true,
+            },
+        });
+        console.log(resultado._sum.voto);
+        return {
+            status: true,
+            total: resultado._sum.voto || 0,
+        };
+    } catch (error) {
+        console.error("Erro ao calcular total geral de pontos:", error);
+        return {
+            status: false,
+            message: "Erro ao calcular total geral de pontos.",
+        };
+    }
+}
+
+//total por equipe
+export async function getSomatorioPorEquipe() {
+    try {
+        const resultados = await prisma.votos.groupBy({
+            by: ['id_competidor'],
+            _sum: {
+                voto: true,
+            },
+            orderBy: {
+                _sum: {
+                    voto: 'desc',
+                },
+            },
+        });
+
+        // Junta com nomes das equipes
+        const equipesComNomes = await Promise.all(resultados.map(async (equipe) => {
+            const competidor = await prisma.competidores.findUnique({
+                where: { id: equipe.id_competidor },
+                select: { nome: true },
+            });
+
+            return {
+                id_competidor: equipe.id_competidor,
+                nome: competidor?.nome || "Equipe desconhecida",
+                total: equipe._sum.voto,
+            };
+        }));
+
+        return {
+            status: true,
+            equipes: equipesComNomes,
+        };
+    } catch (error) {
+        console.error("Erro ao buscar somatório de pontos:", error);
+        return {
+            status: false,
+            message: "Erro ao buscar somatório.",
+        };
+    }
+}
+//ranking de equipes 
+export async function getTop3Equipes() {
+    try {
+        const top = await prisma.votos.groupBy({
+            by: ['id_competidor'],
+            _sum: {
+                voto: true,
+            },
+            orderBy: {
+                _sum: {
+                    voto: 'desc',
+                },
+            },
+            take: 3,
+        });
+
+        // Mapeia os dados para retornar apenas os campos desejados
+        const top3 = top.map(item => ({
+            id_competidor: item.id_competidor,
+            total: item._sum.voto,
+        }));
+
+        return {
+            status: true,
+            top3,
+        };
+    } catch (error) {
+        console.error("Erro ao buscar top 3 equipes:", error);
+        return {
+            status: false,
+            message: "Erro ao buscar ranking.",
         };
     }
 }

@@ -47,7 +47,7 @@ export default function Home() {
           </div>
 
           {/* semanaS.svg */}
-          <div className="relative w-[50vw] sm:w-[500px] aspect-[1/1]">
+          <div className="relative w-[70vw] sm:w-[500px] aspect-[1/1]">
             <Image
               src="/logosenac.png"
               alt="logoSenac"

@@ -13,27 +13,27 @@ export default function Header() {
     });
 
     return (
-        <div className=" flex flex-col items-center  sm:w-1/2 w-[90vw] mx-auto mt-1">
 
-            <div className="flex items-center justify-between">
 
-                <Image
-                    src={"/semanaS.svg"}
-                    alt="foguete"
-                    width={180}
-                    height={50}
-                    className=" p-2    "  // Adicionando drop-shadow-2xl
-                />
+        <div className="flex items-center justify-between mx-auto  w-full sm:w-1/2 px-2 mt-4">
 
-                <Image
-                    src={"/foguete.png"}
-                    alt="foguete"
-                    width={70}
-                    height={50}
-                    className=" p-2    "  // Adicionando drop-shadow-2xl
-                />
-            </div>
+            <Image
+                src={"/semanaS.svg"}
+                alt="foguete"
+                width={150}
+                height={50}
+                className=" px-2    "  // Adicionando drop-shadow-2xl
+            />
 
+            <Image
+                src={"/foguete.png"}
+                alt="foguete"
+                width={80}
+                height={50}
+                className=" px-2    "  // Adicionando drop-shadow-2xl
+            />
         </div>
+
+
     )
 }

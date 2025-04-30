@@ -10,6 +10,7 @@ import {
   busca_qtdJurados,
   busca_qtdPontos,
 } from "../_services/dashboardServices";
+import Ranking from "./_components/grafico";
 
 export default function Page() {
   const [txtBtn, settxtBtn] = useState("Atualizar");
@@ -47,13 +48,13 @@ export default function Page() {
   }, []);
 
   return (
-    <div className="w-screen flex  m-auto items-center justify-center bg-[#121212] sm:w-[90vw] h-screen">
-      <div className="bg-[#004A8D] text-xl p-6 h-16 flex items-center justify-center sm:justify-between gap-4 fixed top-0 z-50 w-[90vw] border-b-2 text-white font-bold ">
+    <div className="w-screen flex  mx-auto items-start justify-center bg-[#121212] sm:w-[90vw] h-screen overflow-hidden ">
+      <div className="bg-orange-500 text-sm sm:text-xl p-6 h-16 flex items-center justify-between sm:justify-between gap-4 fixed top-0 z-50 w-screen sm:w-[90vw] border-b-2 text-white font-bold ">
         DashBoard Geral
         <div className="flex flex-col gap-x-2">
           <Link href="/home">
             <Button
-              className="px-8 rounded text-xl text-orange-400 font-bold border border-orange-400 bg-[#121212] h-12"
+              className="px-8 rounded text-sm sm:text-xl text-white font-bold border-2  bg-[#004A8D] hover:bg-[#004A8D] hover:opacity-50 "
               title="Voltar"
             >
               Home
@@ -61,74 +62,12 @@ export default function Page() {
           </Link>
         </div>
       </div>
-      <div>
-        <motion.h1
-          initial={{ x: "-100vw" }}
-          animate={{ x: "100vw" }}
-          transition={{ duration: 20, ease: "linear", repeat: Infinity }}
-          className="text-white mt-20 w-[300px] text-center text-xl rounded bg-orange-500 "
-        >
-          CEP LAVRAS - MG
-        </motion.h1>
-        <motion.div
-          initial={{ x: "100vw" }}
-          animate={{ x: "-100vw" }}
-          transition={{ duration: 15, ease: "linear", repeat: Infinity }}
-          className="text-xl text-orange-500 w-[300px] text-center  rounded bg-slate-200 "
-        >
-          Transformando vidas
-        </motion.div>
-        <motion.div
-          initial={{ x: "100vw" }}
-          animate={{ x: "-100vw" }}
-          transition={{ duration: 20, ease: "linear", repeat: Infinity }}
-          className="text-xl text-orange-500 w-[300px] text-center  rounded bg-[#004A8D] "
-        >
-          Maker
-        </motion.div>
-        <motion.div
-          initial={{ x: "100vw" }}
-          animate={{ x: "-100vw" }}
-          transition={{ duration: 20, ease: "linear", repeat: Infinity }}
-          className="text-xl text-orange-500 w-[300px] text-center  rounded bg-[#004A8D] "
-        >
-          Inteligencia Artificial
-        </motion.div>
-        <motion.div
-          initial={{ x: "100vw" }}
-          animate={{ x: "-100vw" }}
-          transition={{ duration: 20, ease: "linear", repeat: Infinity }}
-          className="text-xl text-orange-500 w-[300px] text-center  rounded bg-[#004A8D]"
-        >
-          IOT
-        </motion.div>
-        {/* Cards com os Resultados  */}
-        <Cards1 qtdJurados={Jurados} qtdPontos={Pontos} />
-        <motion.div
-          initial={{ x: "100vw" }}
-          animate={{ x: "-100vw" }}
-          transition={{ duration: 20, ease: "linear", repeat: Infinity }}
-          className="text-xl text-orange-500 w-[300px] text-center  rounded bg-[#004A8D]  mt-4"
-        >
-          Programação
-        </motion.div>
 
-        <motion.h1
-          initial={{ x: "-100vw" }}
-          animate={{ x: "100vw" }}
-          transition={{ duration: 15, ease: "linear", repeat: Infinity }}
-          className="text-white mt-8 w-[300px] text-center text-xl rounded bg-orange-500 "
-        >
-          SESC - MG
-        </motion.h1>
-        <motion.h1
-          initial={{ x: "90vw" }}
-          animate={{ x: "-90vw" }}
-          transition={{ duration: 15, ease: "linear", repeat: Infinity }}
-          className="text-white mt-8 mb-20 w-[300px] text-center text-xl rounded bg-orange-500 "
-        >
-          FECOMERCIO - MG
-        </motion.h1>
+      <div className="w-[95vw] sm:w-1/2">
+        <Cards1 qtdJurados={Jurados} qtdPontos={Pontos} />
+        {/* Cards com os Resultados  */}
+
+        <Ranking />
       </div>
     </div>
   );

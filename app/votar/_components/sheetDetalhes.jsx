@@ -13,40 +13,33 @@ import { useState, useRef } from "react";
 import { IoMdCloseCircleOutline } from "react-icons/io";
 import { MdOutlineRemoveRedEye } from "react-icons/md";
 import { useToast } from "@/hooks/use-toast";
+import { Button } from "@/components/ui/button";
 
 export default function DetalhesSheet() {
   const detalhesQuesitos = {
     1: {
-      nome: "Clareza na Apresentação",
+      nome: "Apresentação.",
       descricao:
-        "Avalia o quão clara e compreensível foi a apresentação do projeto.",
+        "Narrativa/Storytelling, capacidade de vender o negócio, percepção de conhecimento do mercado, convicção e motivação do apresentador, desing da apresentação e velocidade da fala.",
     },
     2: {
-      nome: "Original e Criativa",
+      nome: "Aplicabilidade/Exequibilidade.",
       descricao:
-        "Verifica se a ideia apresentada é inovadora e criativa, comparativo com soluções existentes e concorrentes ",
+        "A solução inovadora possui potencial de aplicabilidade e/ou commercialização no comércio de bens, serviços e turismo?",
     },
     3: {
-      nome: "Trabalho em Equipe",
-      descricao: "Observa a colaboração entre os membros da equipe.",
+      nome: "Clareza das Informações.",
+      descricao: "Definição do negócio e seu diferencial, descrição clara do problema, solução endereçada ao problema e definição de mercado.",
     },
     4: {
-      nome: "Nível de Inovação",
-      descricao: "Mede o grau de inovação no projeto.",
+      nome: "Potencial Inovador.",
+      descricao: "Nível de novidade ou aperfeiçoamento que resulte em melhorias em processos, produtos ou serviços.",
     },
     5: {
-      nome: "Consciência Sustentável",
-      descricao: "Avalia se o projeto considera impactos ambientais.",
-    },
-    6: {
-      nome: "Impacto Social",
-      descricao: "Verifica o potencial de impacto social do projeto.",
-    },
-    7: {
-      nome: "Uso de Tecnologias",
-      descricao:
-        "Avalia o uso adequado e inteligente de tecnologias (IA/Programação/Recursos Digitais).",
-    },
+      nome: "Viabilidade Técnica.",
+      descricao: "A solução apresentada é tecnicamente viável?",
+    }
+
   };
 
   const [quesitoSelecionado, setQuesitoSelecionado] = useState(null);
@@ -90,12 +83,7 @@ export default function DetalhesSheet() {
         side="top"
         className="bg-zinc-900 rounded-xl w-full mt-2 sm:w-2/3 p-6 m-auto flex flex-col items-center justify-start border-2"
       >
-        <SheetClose asChild>
-          <IoMdCloseCircleOutline
-            className="absolute right-3 top-3 bg-orange-500 text-white hover:opacity-70 border rounded cursor-pointer text-[32px]"
-            aria-label="Fechar"
-          />
-        </SheetClose>
+   
 
         <SheetHeader className="text-start w-full sm:w-1/2 sm:p-4">
           <SheetTitle className="text-orange-500 text-sm font-bold">
@@ -105,6 +93,13 @@ export default function DetalhesSheet() {
             {quesitoSelecionado?.descricao}
           </SheetDescription>
         </SheetHeader>
+        <SheetClose asChild>
+          <Button
+            className="bg-orange-500 text-white hover:opacity-70 border rounded cursor-pointer text-xl"
+            aria-label="Fechar"
+
+          >Fechar</Button>
+        </SheetClose>
       </SheetContent>
     </Sheet>
   );

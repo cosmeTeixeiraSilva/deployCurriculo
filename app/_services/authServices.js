@@ -30,7 +30,7 @@ export async function autenticarUsuario(formData) {
 
     // Confirmação do nome (pode ser desnecessária, mas fica como camada extra)
     if (user !== usuario.nome) {
-        return { error: 'Nome de usuário inválido' };
+        return { error: 'Usuário não encontrado.' };
     }
 
     // Compara a senha com o hash armazenado
@@ -38,7 +38,7 @@ export async function autenticarUsuario(formData) {
 
     if (!match) {
         console.log("Usuário NÃO autenticado...");
-        return { error: 'Senha incorreta' };
+        return { error: 'Favor Verificar sua Senha...' };
     }
     if (usuario.nivel === 1) {
         nivel = "Competidor";
