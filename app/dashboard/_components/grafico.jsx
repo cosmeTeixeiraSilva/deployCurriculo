@@ -1,5 +1,4 @@
 "use client";
-
 import {
   BarChart,
   Bar,
@@ -27,7 +26,7 @@ const coresEquipe = {
   3: "#f59e0b",
 };
 
-export default function GraficoHorizontal() {
+export default function GraficoHorizontal({ refreshTrigger }) {
   const [data, setData] = useState([]);
   //use Effect
   useEffect(() => {
@@ -46,20 +45,20 @@ export default function GraficoHorizontal() {
     }
 
     carregarDados();
-  }, []);
+  }, [refreshTrigger]);
   return (
     <Card className="w-[85%] sm:w-full mx-auto mt-8 border-4 border-orange-400 mb-12">
-      <CardHeader className="text-orange-400 font-semibold">
+      <CardHeader className="text-orange-400 font-semibold text-center">
         Ranking das Equipes por total de Pontos.
       </CardHeader>
       <CardContent>
         <div className="h-[220px]">
-          <ResponsiveContainer className="w-full ">
+          <ResponsiveContainer className="w-full">
             <BarChart
               data={data}
               barSize={50}
               layout="vertical"
-              margin={{ top: 0, right: 10, left: 10, bottom: 0 }}
+              margin={{ top: 0, right: 10, left: 0, bottom: 0 }}
             >
               <XAxis type="number" />
               <YAxis type="category" dataKey="id_competidor" />

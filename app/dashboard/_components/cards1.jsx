@@ -4,41 +4,48 @@ import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardHeader, CardContent, CardTitle } from "@/components/ui/card";
 import { getTotalGeralPontos } from "@/app/_services/votarServices";
-
-export default function Cards1({ qtdJurados, qtdPontos }) {
+import { delay, formatarData } from "@/lib/utils";
+import { useRouter } from "next/navigation";
+export default function Cards1({ qtdJurados, qtdPontos, onAtualizar }) {
+  const router = useRouter();
   const [loading, setLoading] = useState(false);
-
   const [total, setTotal] = useState([]);
   const [ultimaAtualizacao, setUltimaAtualizacao] = useState(""); // Estado para armazenar a hora
 
   // Função para formatar data e hora
-  const formatarDataHora = () => {
-    const agora = new Date();
-    return agora.toLocaleString("pt-BR", {
-      day: "2-digit",
-      month: "2-digit",
-      year: "numeric",
-      hour: "2-digit",
-      minute: "2-digit",
-      second: "2-digit",
-    });
+  const handleAtualizarDados = async () => {
+    setLoading(true);
+    await delay(1500); //aguardando  1.5 segundos simulando atraso
+    try {
+      await carregarDados(); // espera os dados locais
+      await onAtualizar(); // espera a atualização do pai (Ranking)
+      const agora = new Date();
+      const dataBrasil = formatarData(agora);
+      setUltimaAtualizacao(dataBrasil);
+      router.refresh(); // só faz refresh depois
+    } catch (error) {
+      console.error("Erro ao atualizar dados:", error);
+    } finally {
+      setLoading(false); // agora sim, loading só encerra no final
+    }
   };
+
+  //busca Dados no Banco
+  async function carregarDados() {
+    try {
+      const total = await getTotalGeralPontos();
+      //console.log(total);
+      if (total.status) {
+        setTotal(total.total);
+      }
+    } catch (error) {
+      //console.error("Erro ao carregar dados:", error);
+    } finally {
+      setLoading(false);
+    }
+  }
   //use Effect
   useEffect(() => {
-    async function carregarDados() {
-      try {
-        const total = await getTotalGeralPontos();
-        console.log(total);
-        if (total.status) {
-          setTotal(total.total);
-        }
-      } catch (error) {
-        console.error("Erro ao carregar dados:", error);
-      } finally {
-        setLoading(false);
-      }
-    }
-
     carregarDados();
   }, []);
 
@@ -51,6 +58,7 @@ export default function Cards1({ qtdJurados, qtdPontos }) {
       <div className="w-full  flex gap-4  items-center justify-around m-4 px-2 sm:flex-row mx-auto ">
         <Button
           disabled={loading}
+          onClick={() => handleAtualizarDados()}
           className="bg-green-600 text-white px-4  rounded w-1/3 sm:w-1/2 text-xl border-2"
         >
           {loading ? "Atualizando..." : "Atualizar"}

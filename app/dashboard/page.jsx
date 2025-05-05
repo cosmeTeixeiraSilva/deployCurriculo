@@ -17,6 +17,13 @@ export default function Page() {
   const [Jurados, setJurados] = useState();
   const [Pontos, setPontos] = useState();
   const router = useRouter();
+  const [refreshCount, setRefreshCount] = useState(0); // dispara reload
+
+  const handleAtualizarDados = () => {
+    setRefreshCount((prev) => prev + 1); // muda valor => força efeito no gráfico
+    console.log(`Atualizando Gráfico: ${refreshCount}`);
+  };
+
   useEffect(() => {
     const atualizarDash = async () => {
       const resultado = await validarToken();
@@ -63,11 +70,15 @@ export default function Page() {
         </div>
       </div>
 
-      <div className="w-[95vw] sm:w-1/2">
-        <Cards1 qtdJurados={Jurados} qtdPontos={Pontos} />
+      <div className="w-full sm:w-1/2">
+        <Cards1
+          qtdJurados={Jurados}
+          qtdPontos={Pontos}
+          onAtualizar={handleAtualizarDados}
+        />
         {/* Cards com os Resultados  */}
 
-        <Ranking />
+        <Ranking refreshTrigger={refreshCount} />
       </div>
     </div>
   );

@@ -13,7 +13,7 @@ export default function Formlogin() {
   const [autenticando, setAutenticando] = useState(false);
   const router = useRouter();
   const { toast } = useToast(); // aqui pega a função
-  
+
   const handleSubmit = async (event) => {
     event.preventDefault();
     setAutenticando(true);
@@ -21,7 +21,7 @@ export default function Formlogin() {
     const formData = new FormData(form);
     const dados = Object.fromEntries(formData.entries());
     const result = await autenticarUsuario(dados);
-   
+
     //retorno da Server Action de Login
     if (result.error) {
       console.log(result.error);
@@ -33,13 +33,10 @@ export default function Formlogin() {
       });
 
       setAutenticando(false);
-      router.refresh();     // Só então atualiza os dados
-  
+      router.refresh(); // Só então atualiza os dados
     } else {
       router.push("/home");
     }
-    
-    
   };
 
   return (
@@ -47,7 +44,6 @@ export default function Formlogin() {
       onSubmit={handleSubmit}
       className="flex flex-col items-center justify-center space-y-6 w-screen sm:w-1/2 mx-auto"
     >
-  
       <input
         type="text"
         name="user"
@@ -55,7 +51,7 @@ export default function Formlogin() {
         value={user}
         onChange={(e) => setUser(e.target.value.toLowerCase().trim())}
         autoFocus
-        className="rounded bg-slate-200 p-2 w-full   text-blue-500 text-xl h-12 border-4 border-orange-400"
+        className="rounded bg-slate-200 p-2 w-[80vw] sm:w-full   text-blue-500 text-xl h-12 border-4 border-orange-400"
       />
       <input
         type="password"
@@ -65,12 +61,12 @@ export default function Formlogin() {
         placeholder="Senha..."
         value={senha}
         onChange={(e) => setSenha(e.target.value)}
-        className="rounded bg-slate-200 p-2 w-full sm:w-full text-blue-500 text-xl h-12 border-4 border-orange-400"
+        className="rounded bg-slate-200 p-2 w-[80vw] sm:w-full  text-blue-500 text-xl h-12 border-4 border-orange-400"
       />
 
       <Button
         type="submit"
-        className="rounded p-2 bg-[#004A8D] w-full sm:w-full font-bold text-white text-xl h-12 hover:cursor-pointer hover:opacity-50 hover:bg-orange-400 border-2"
+        className="rounded p-2 bg-[#004A8D] w-[80vw] sm:w-full font-bold text-white text-xl h-12 hover:cursor-pointer hover:opacity-50 hover:bg-orange-400 border-2"
       >
         {autenticando ? "Autenticando..." : "ENTRAR"}
       </Button>
